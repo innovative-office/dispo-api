@@ -28,6 +28,7 @@ set :shared_paths, ['config/application.yml', 'config/database.yml', 'config/sec
 #   set :forward_agent, true     # SSH forward_agent.
 set :user, 'tzhbami7'
 set :ruby_version, '2.1.7'
+set :term_mode, nil
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
