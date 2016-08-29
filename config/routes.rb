@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   resources :purchase_orders, only: [ :index, :show, :update ]
+  resources :purchase_positions
   resources :shipping_routes
   resources :shipping_addresses
+  resources :calculations
+  resources :zip_locations
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
