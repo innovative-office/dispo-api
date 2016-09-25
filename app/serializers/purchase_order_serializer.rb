@@ -4,4 +4,5 @@ class PurchaseOrderSerializer < ActiveModel::Serializer
   has_one :shipping_route
   has_one :shipping_address, serializer: ShippingAddressSerializer
   has_one :calculation
+  has_many :pallets
 end

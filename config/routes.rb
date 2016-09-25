@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :shipping_addresses
   resources :calculations
   resources :zip_locations
+  resources :baan_imports
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

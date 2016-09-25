@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
 gem 'dumper'
 gem 'mina'
 gem "figaro"
