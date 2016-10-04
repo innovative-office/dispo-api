@@ -1,12 +1,12 @@
 class LineItemsController < ApplicationController
   def index
     @results = PalletPurchasePositionAssignment.limit(100)
-    render json: @results, include: params[:include]
+    render json: @results, include: params[:include], serializer: LineItemSerializer
   end
 
   def show
     @result = PalletPurchasePositionAssignment.where(id: params[:id]).first!
-    render json: @result, include: params[:include]
+    render json: @result, include: params[:include], serializer: LineItemSerializer
   end
   
   def create
