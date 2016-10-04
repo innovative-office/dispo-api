@@ -10,8 +10,8 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-# set :domain, 'dispo-api.kern-fusion.ch'
-set :domain, '159.100.248.34'
+set :domain, 'dispo-api.kern-fusion.ch'
+# set :domain, '159.100.248.34'
 set :deploy_to, '/home/tzhbami7/apps/dispo-api'
 set :repository, 'https://github.com/innovative-office/dispo-api.git'
 set :branch, 'master'

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   resources :baan_imports
   resources :line_items
   resources :pallets
-  
+  resources :variants
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
