@@ -10,10 +10,13 @@ class CalculationsController < ApplicationController
   end
   
   def create
+    puts prms
     @result = Calculation.new(prms)
-    if @result.save
-      render json: @result
-    end
+    
+    # if @result.save
+    #   render json: @result
+    # end
+    render json: @result
   end
   
   def destroy
@@ -26,8 +29,8 @@ class CalculationsController < ApplicationController
 private
 
   def prms
-    pa = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
-    # params.require(data: :attributes).permit(:name)
-    return pa
+    res = ActiveModelSerializers::Deserialization.jsonapi_parse(params, polymorphic: [:calculable])
+    res[:calculable_type] = res[:calculable_type].singularize.underscore.camelize
+    return res
   end
 end

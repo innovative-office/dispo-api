@@ -33,8 +33,8 @@ class PurchaseOrdersController < ApplicationController
 private
 
   def prms
-    pa = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+    res = ActiveModelSerializers::Deserialization.jsonapi_parse(params, except: [:calculation])
     # params.require(data: :attributes).permit(:name)
-    return pa
+    return res
   end
 end

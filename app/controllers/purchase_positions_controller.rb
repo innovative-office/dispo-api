@@ -15,7 +15,14 @@ class PurchasePositionsController < ApplicationController
       render json: @result
     end
   end
-  
+
+  def update
+    @result = PurchasePosition.where(id: params[:id]).first!
+    if @result.update_attributes(prms)
+      render json: @result
+    end
+  end
+
   def destroy
     @result = PurchasePosition.where(id: params[:id])
     if @result.destroy
