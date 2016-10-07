@@ -15,7 +15,14 @@ class VariantsController < ApplicationController
       render json: @result
     end
   end
-  
+
+  def update
+    @result = Variant.where(id: params[:id]).first!
+    if @result.update_attributes(prms)
+      render json: @result
+    end
+  end
+
   def destroy
     @result = Variant.where(id: params[:id])
     if @result.destroy

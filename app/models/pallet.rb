@@ -8,5 +8,7 @@ class Pallet < ActiveRecord::Base
     has_many :variants, through: :pallet_purchase_position_assignments
     has_many :purchase_positions, through: :variants
 
+    belongs_to :pallet_type
+
     attr_accessor :selected
 end

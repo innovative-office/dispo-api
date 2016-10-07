@@ -1,6 +1,6 @@
 class PalletsController < ApplicationController
   def index
-    @results = Pallet.limit(100)
+    @results = Pallet.includes(:purchase_positions, :purchase_orders, :pallet_type, line_items: [{ variant: [purchase_position: [:purchase_order, :zip_location]] }]).limit(100)
     render json: @results, include: params[:include]
   end
 

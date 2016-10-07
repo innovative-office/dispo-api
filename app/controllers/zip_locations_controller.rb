@@ -1,6 +1,6 @@
 class ZipLocationsController < ApplicationController
   def index
-    @results = ZipLocation.limit(100)
+    @results = ZipLocation.all
     render json: @results, include: params[:include]
   end
 

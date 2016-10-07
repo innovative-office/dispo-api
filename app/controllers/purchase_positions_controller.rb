@@ -1,6 +1,6 @@
 class PurchasePositionsController < ApplicationController
   def index
-    @results = PurchasePosition.limit(100)
+    @results = PurchasePosition.includes(:zip_location, purchase_order: [:calculation, :purchase_positions, :pallets, :shipping_route, :shipping_address]).limit(100)
     render json: @results, include: params[:include]
   end
 

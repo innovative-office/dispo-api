@@ -1,6 +1,6 @@
 class ShippingRoutesController < ApplicationController
   def index
-    @results = ShippingRoute.limit(100)
+    @results = ShippingRoute.all
     render json: @results, include: params[:include]
   end
 
