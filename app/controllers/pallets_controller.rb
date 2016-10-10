@@ -1,6 +1,9 @@
 class PalletsController < ApplicationController
   def index
-    @results = Pallet.includes(:purchase_positions, :purchase_orders, :pallet_type, line_items: [{ variant: [purchase_position: [:purchase_order, :zip_location]] }]).limit(100)
+    @results = Pallet.includes(:zip_location, :shipping_route, :shipping_address, :purchase_positions, :purchase_orders, :pallet_type, line_items: [{ variant: [purchase_position: [:purchase_order, :zip_location]] }]).limit(100)
+    if params[:filter]
+      @results = @results.where(filters)
+    end
     render json: @results, include: params[:include]
   end
 
@@ -31,6 +34,9 @@ class PalletsController < ApplicationController
   end
 
 private
+  def filters
+    return Hash[params[:filter].map{ |k, v| [k.underscore, v.empty? ? nil : v] }]
+  end
 
   def prms
     pa = ActiveModelSerializers::Deserialization.jsonapi_parse(params)

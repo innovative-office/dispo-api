@@ -9,6 +9,9 @@ class Pallet < ActiveRecord::Base
     has_many :purchase_positions, through: :variants
 
     belongs_to :pallet_type
+    belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id'
+    belongs_to :shipping_route
+    belongs_to :zip_location
 
     attr_accessor :selected
 end

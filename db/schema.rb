@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009002254) do
+ActiveRecord::Schema.define(version: 20161010212915) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id",           limit: 4
@@ -444,7 +444,7 @@ ActiveRecord::Schema.define(version: 20161009002254) do
     t.integer "pallet_type_id",        limit: 4
     t.boolean "delivered",                        default: false
     t.integer "delivery_rejection_id", limit: 4
-    t.integer "level_3",               limit: 4
+    t.integer "shipping_address_id",   limit: 4
     t.integer "zip_location_id",       limit: 4
     t.boolean "mixed",                            default: false
     t.integer "shipping_route_id",     limit: 4
