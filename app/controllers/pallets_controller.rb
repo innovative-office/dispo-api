@@ -1,6 +1,15 @@
 class PalletsController < ApplicationController
   def index
-    @results = Pallet.includes(:zip_location, :shipping_route, :shipping_address, :purchase_positions, :purchase_orders, :pallet_type, line_items: [{ variant: [purchase_position: [:purchase_order, :zip_location]] }]).limit(100)
+    if params[:page]
+      @results = Pallet.page(params[:page][:number]).per(params[:page][:size])
+    else
+      @results = Pallet.limit(100)
+    end
+
+    @results = @results.includes(:zip_location, :shipping_route, :shipping_address, :purchase_positions, :purchase_orders, :pallet_type)
+    @results = @results.includes(:purchase_positions)
+    @results = @results.includes(line_items: [{ variant: [purchase_position: [:purchase_order, :zip_location, :commodity_code, :shipping_route]] }])
+
     if params[:filter]
       @results = @results.where(filters)
     end
@@ -35,7 +44,9 @@ class PalletsController < ApplicationController
 
 private
   def filters
-    return Hash[params[:filter].map{ |k, v| [k.underscore, v.empty? ? nil : v] }]
+    return Hash[params[:filter].map{ |k, v| [k.underscore, v.empty? ? nil : v] }].except("id")
+    # return params.require(:filter).permit(:id).delete_if { |k, v| v.empty? }
+    # return params.require(:filter).permit(:id).except(:id)
   end
 
   def prms

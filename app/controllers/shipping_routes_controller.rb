@@ -1,6 +1,6 @@
 class ShippingRoutesController < ApplicationController
   def index
-    @results = ShippingRoute.all
+    @results = ShippingRoute.all.order('name ASC')
     render json: @results, include: params[:include]
   end
 

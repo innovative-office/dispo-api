@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :commodity_codes
   resources :cargo_lists
   resources :shippers
+  resources :pallet_types
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

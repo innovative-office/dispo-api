@@ -1,6 +1,11 @@
 class PurchasePositionsController < ApplicationController
   def index
-    @results = PurchasePosition.includes(:commodity_code, :shipping_route, :zip_location, purchase_order: [:calculation, :purchase_positions, :pallets, :shipping_route, :shipping_address]).limit(100)
+    @results = PurchasePosition.includes(:commodity_code, :shipping_route, :zip_location).limit(100)
+    @results = @results.includes(purchase_order: [:calculation, :purchase_positions, :pallets, :shipping_route, :shipping_address])
+
+    if params[:filter]
+      @results = @results.where(filter_prms)
+    end
     render json: @results, include: params[:include]
   end
 
@@ -36,5 +41,9 @@ private
     pa = ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     # params.require(data: :attributes).permit(:name)
     return pa
+  end
+
+  def filter_prms
+    return params.require(:filter).permit(:baan_id).delete_if { |k, v| v.empty? }
   end
 end
